@@ -26,7 +26,7 @@ event.listen(User, 'before_insert', insert_user_listener)
 # for x in range(1,10):
 #     user = User(name=f"user {x}", email=f"user_{x}@example.com")
 #     session.add(user)
-    
+
 @event.listens_for(User, 'before_update')
 def audit_user_update(mapper: Mapper, connection: Connection, target: User):
     stmt = text("select email from users where id = :user_id")

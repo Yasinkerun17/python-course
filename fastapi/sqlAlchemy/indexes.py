@@ -10,18 +10,20 @@ class Base(DeclarativeBase):
     
 class User(Base):
     __tablename__="users"
-    name:Mapped[str] = mapped_column()
+    name:Mapped[str] = mapped_column(index=True)
     email:Mapped[str]
     
+
+Base.metadata.create_all(engine)
 
 Base.metadata.reflect(bind=engine)
 
 # Session = sessionmaker(bind=engine)
 # session = Session()
 
-user_name_index = Index("ix_user_name", User.name)
-user_name_index.create(bind=engine, checkfirst=True)
-user_name_index.create(bind=engine,checkfirst=True)
+# user_name_index = Index("ix_user_name", User.name)
+# user_name_index.create(bind=engine, checkfirst=True)
+# user_name_index.create(bind=engine,checkfirst=True)
 
 for name, table in Base.metadata.tables.items():
     print(f"\ntable: {name}")
